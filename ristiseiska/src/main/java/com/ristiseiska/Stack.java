@@ -19,7 +19,7 @@ public class Stack {
         return cards.get(0);
     }
     public Card getBottomCard(){
-        if(this.cards.isEmpty() == false){
+        if(!this.cards.isEmpty()){
             return cards.get(this.cards.size() - 1);
         }else{
             return (new Card(maat.CLUBS, 0));

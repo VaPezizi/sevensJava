@@ -11,7 +11,7 @@ public class Player {
         this.name = name;
         this.cards = new ArrayList<Card>();
     }
-    //Create a Player with only a name
+    //Create a Player with cards
     public Player(String name, ArrayList<Card> cards){
         this.name = name;
         this.cards = cards;

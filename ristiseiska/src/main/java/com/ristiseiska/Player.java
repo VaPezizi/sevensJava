@@ -28,5 +28,12 @@ public class Player {
     public void removeCard(Card card){
         cards.remove(card);
     }
+    public String toString(){
+        String kortit = "";
+        for(Card kortti : this.cards){
+            kortit = kortit + "\n" + kortti.toString();
+        }
+        return "Pelaaja: " + this.name + kortit;
+    }
     
 }

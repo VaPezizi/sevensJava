@@ -1,9 +1,14 @@
 package com.ristiseiska;
 
 import javafx.application.Application;  // sovellus
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;              // (pää)ikkuna
 
 import javafx.scene.Scene;              // näkymä
@@ -20,8 +25,25 @@ public class javaFx extends Application{
     @Override
     public void start(Stage ikkuna) {
 
-        //Creating a deck for the game
+        //Start of the game setups
+        FlowPane startFlowPane = new FlowPane(Orientation.VERTICAL);
+        startFlowPane.setPadding(new Insets(10));
+        startFlowPane.setHgap(10);
+        startFlowPane.setAlignment(Pos.CENTER);
 
+        Label playerCountLable = new Label("Enter the player count (1 - 4)");
+        TextField playerCountTextField = new TextField("Terve");
+        Button startButton = new Button("Start game");
+
+        Text playerCountStartText = new Text("");
+
+        startFlowPane.getChildren().addAll(playerCountLable, playerCountTextField, startButton, playerCountStartText);
+
+        //Creating a deck for the game
+        Deck gameDeck = new Deck();
+        Player Iisakki = new Player("Iisakki", gameDeck.giveCards(10));
+
+        Text teksti = new Text(Iisakki.toString());
 
         Label otsikkoLabel = new Label("Ristiseiska");
 
@@ -42,17 +64,41 @@ public class javaFx extends Application{
 
         Asettelu.setPadding(new Insets(5));
         Asettelu.setTop(otsikkoLabel);
-        Asettelu.setCenter(kortitHbox);
+        Asettelu.setCenter(startFlowPane);
         Scene view = new Scene(Asettelu, 1280, 720);
 
         ikkuna.setScene(view);
         ikkuna.setTitle("Ristiseiska");
 
         ikkuna.show();
+
+        startButton.setOnAction(event -> {
+            String regex = "\\d+";
+            String startButtonTeksti = playerCountTextField.getText();
+            if(startButtonTeksti.matches(regex) && Integer.parseInt(startButtonTeksti) <= 4 && Integer.parseInt(startButtonTeksti) > 0) {
+                preGameWindow(ikkuna, view, Asettelu, startButtonTeksti);
+            }else{
+                playerCountStartText.setText("Incorrect input!");
+            }
+        });
+    }
+    public void preGameWindow(Stage ikkuna, Scene scene, BorderPane Asettelu, String startButtonTeksti){
+        //FlowPane for the player names
+        FlowPane playerNameInputs = new FlowPane(Orientation.VERTICAL);
+        playerNameInputs.setAlignment(Pos.CENTER);
+        playerNameInputs.setVgap(10);
+        playerNameInputs.getChildren().addAll(new Text("Player count:" + startButtonTeksti), new Text("Enter player names:"));
+        for(int i=0; i < Integer.parseInt(startButtonTeksti);i++){
+            playerNameInputs.getChildren().addAll(new TextField(""));
+        }
+        Button playerNameInputsButton = new Button("Start");
+        playerNameInputs.getChildren().add(playerNameInputsButton);
+        Asettelu.setCenter(playerNameInputs);
+
+        playerNameInputsButton.setOnAction(event2 -> {
+            playerNameInputs.getChildren().addAll(new Text("Terve vaan"));
+        });
     }
 
 
-    //public static void main(String[] args) {
-        //launch(JavaFxNoppa.class, args);
-    //}
 }

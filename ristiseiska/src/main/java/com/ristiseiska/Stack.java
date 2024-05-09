@@ -6,12 +6,21 @@ import com.ristiseiska.Card.maat;
 
 public class Stack {
     private ArrayList<Card> cards;
-    private String maa;
+    private maat maa;
 
-    public Stack(String maa){
+    public Stack(maat maa){
         this.cards = new ArrayList<Card>();
         this.maa = maa;
     }
+    public static ArrayList<Stack>createStacks(){
+        ArrayList<Stack> stacks = new ArrayList<>();
+        stacks.add(new Stack(maat.HEARTS));
+        stacks.add(new Stack(maat.CLUBS));
+        stacks.add(new Stack(maat.DIAMONDS));
+        stacks.add(new Stack(maat.SPADES));
+        return new ArrayList<Stack>();
+    }
+
     public ArrayList<Card> getCards(){
         return this.cards;
     }

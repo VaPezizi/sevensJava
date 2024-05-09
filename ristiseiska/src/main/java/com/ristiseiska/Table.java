@@ -25,5 +25,11 @@ public class Table {
             players.remove(player);
         }
     }
+    public ArrayList<Player> getPlayers(){
+        return this.players;
+    }
+    public ArrayList<Stack>getStacks(){
+        return this.tableList;
+    }
     
 }

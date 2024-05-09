@@ -3,6 +3,7 @@ package com.ristiseiska;
 import javafx.application.Application;  // sovellus
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -16,6 +17,8 @@ import javafx.scene.layout.BorderPane;  // asettelu
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;      // komponentti (teksti)
+
+import java.util.ArrayList;
 
 
 public class javaFx extends Application{
@@ -75,7 +78,7 @@ public class javaFx extends Application{
         startButton.setOnAction(event -> {
             String regex = "\\d+";
             String startButtonTeksti = playerCountTextField.getText();
-            if(startButtonTeksti.matches(regex) && Integer.parseInt(startButtonTeksti) <= 4 && Integer.parseInt(startButtonTeksti) > 0) {
+            if(startButtonTeksti.matches(regex) && Integer.parseInt(startButtonTeksti) <= 4 && Integer.parseInt(startButtonTeksti) > 1) {
                 preGameWindow(ikkuna, view, Asettelu, startButtonTeksti);
             }else{
                 playerCountStartText.setText("Incorrect input!");
@@ -96,7 +99,15 @@ public class javaFx extends Application{
         Asettelu.setCenter(playerNameInputs);
 
         playerNameInputsButton.setOnAction(event2 -> {
-            playerNameInputs.getChildren().addAll(new Text("Terve vaan"));
+            ArrayList<String>names = new ArrayList<>();
+            for(Node txt : playerNameInputs.getChildren()){
+                if(txt.getClass() == TextField.class){
+                    names.add(((TextField) txt).getText());
+                }
+            }
+            if(!names.isEmpty()){
+                Game game = new Game(ikkuna, names);
+            }
         });
     }
 

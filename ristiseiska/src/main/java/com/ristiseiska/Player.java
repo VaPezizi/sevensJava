@@ -28,12 +28,15 @@ public class Player {
     public void removeCard(Card card){
         cards.remove(card);
     }
-    public String toString(){
+    public String toString(boolean showcards){
         String kortit = "";
         for(Card kortti : this.cards){
             kortit = kortit + "\n" + kortti.toString();
         }
         return "Pelaaja: " + this.name + kortit;
+    }
+    public String toString(){
+        return "Pelaaja: " + this.name;
     }
     
 }

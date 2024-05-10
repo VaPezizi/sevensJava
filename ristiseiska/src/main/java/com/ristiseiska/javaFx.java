@@ -24,10 +24,12 @@ import java.util.ArrayList;
 public class javaFx extends Application{
     // d
     //private Noppa n1;
+    private Game game;
+    private Stage ikkuna;
 
     @Override
     public void start(Stage ikkuna) {
-
+        this.ikkuna = ikkuna;
         //Start of the game setups
         FlowPane startFlowPane = new FlowPane(Orientation.VERTICAL);
         startFlowPane.setPadding(new Insets(10));
@@ -41,12 +43,6 @@ public class javaFx extends Application{
         Text playerCountStartText = new Text("");
 
         startFlowPane.getChildren().addAll(playerCountLable, playerCountTextField, startButton, playerCountStartText);
-
-        //Creating a deck for the game
-        Deck gameDeck = new Deck();
-        Player Iisakki = new Player("Iisakki", gameDeck.giveCards(10));
-
-        Text teksti = new Text(Iisakki.toString());
 
         Label otsikkoLabel = new Label("Ristiseiska");
 
@@ -79,13 +75,13 @@ public class javaFx extends Application{
             String regex = "\\d+";
             String startButtonTeksti = playerCountTextField.getText();
             if(startButtonTeksti.matches(regex) && Integer.parseInt(startButtonTeksti) <= 4 && Integer.parseInt(startButtonTeksti) > 1) {
-                preGameWindow(ikkuna, view, Asettelu, startButtonTeksti);
+                preGameWindow(view, Asettelu, startButtonTeksti);
             }else{
                 playerCountStartText.setText("Incorrect input!");
             }
         });
     }
-    public void preGameWindow(Stage ikkuna, Scene scene, BorderPane Asettelu, String startButtonTeksti){
+    public void preGameWindow(Scene scene, BorderPane Asettelu, String startButtonTeksti){
         //FlowPane for the player names
         FlowPane playerNameInputs = new FlowPane(Orientation.VERTICAL);
         playerNameInputs.setAlignment(Pos.CENTER);
@@ -105,8 +101,8 @@ public class javaFx extends Application{
                     names.add(((TextField) txt).getText());
                 }
             }
-            if(!names.isEmpty()){
-                Game game = new Game(ikkuna, names);
+            if(names.size() > 1){
+                this.game = new Game(ikkuna, names);
             }
         });
     }

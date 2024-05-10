@@ -48,19 +48,6 @@ public class javaFx extends Application{
 
         BorderPane Asettelu = new BorderPane();
 
-        Button kortti1 = new Button("kortti 1");
-        Button kortti2 = new Button("kortti 2");
-        Button kortti3 = new Button("kortti 3");
-        Button kortti4 = new Button("kortti 4");
-
-
-        HBox kortitHbox = new HBox();
-        kortitHbox.setPadding(new Insets(10));
-        kortitHbox.setSpacing(10);
-        kortitHbox.setAlignment(Pos.CENTER);
-        kortitHbox.getChildren().addAll(kortti1, kortti2, kortti3, kortti4);
-
-
         Asettelu.setPadding(new Insets(5));
         Asettelu.setTop(otsikkoLabel);
         Asettelu.setCenter(startFlowPane);

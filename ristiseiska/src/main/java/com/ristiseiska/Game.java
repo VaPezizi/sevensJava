@@ -37,7 +37,6 @@ public class Game{
                 }
             }
         }
-
         //Changes the scene to the game screem
         BorderPane Asettelu = new BorderPane();
         this.view = new Scene(Asettelu, 1280, 720);
